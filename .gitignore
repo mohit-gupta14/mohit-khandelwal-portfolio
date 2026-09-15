@@ -1,0 +1,19 @@
+# Node dependencies
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Tauri / Rust build artifacts
+src-tauri/target/
+src-tauri/gen/
+
+# Editor & System files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.DS_Store
+Thumbs.db
+.env
+.env*.local
+*.zip
