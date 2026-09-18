@@ -1,11 +1,28 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
+  color-scheme: light;
+  --app-bg: #F8FAFC;
+  --app-surface: #FFFFFF;
+  --app-card: #FFFFFF;
+  --app-text: #0F172A;
+  --app-muted: #64748B;
+  --app-border: rgba(0, 0, 0, 0.08);
+  --rn-cyan: #00D8FF;
+  --rn-blue: #0284C7;
+}
+
+.dark {
   color-scheme: dark;
   --app-bg: #08090E;
   --app-surface: #0E111B;
   --app-card: #141824;
+  --app-text: #F8FAFC;
+  --app-muted: #94A3B8;
+  --app-border: rgba(255, 255, 255, 0.08);
   --rn-cyan: #00D8FF;
   --rn-blue: #38BDF8;
 }
@@ -13,51 +30,75 @@
 html, body {
   min-height: 100%;
   background-color: var(--app-bg);
-  color: #F8FAFC;
+  color: var(--app-text);
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Custom Scrollbar for sleek mobile app feel */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(8, 9, 14, 0.8);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(140, 140, 160, 0.25);
   border-radius: 9999px;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+}
+
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 216, 255, 0.4);
+  background: rgba(0, 216, 255, 0.5);
 }
 
 /* Glassmorphism helpers */
 .glass-panel {
-  background: rgba(14, 17, 27, 0.75);
+  background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+}
+
+.dark .glass-panel {
+  background: rgba(14, 17, 27, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
 }
 
 .glass-pill {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.04);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dark .glass-pill {
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .glass-card {
-  background: linear-gradient(135deg, rgba(20, 24, 36, 0.85) 0%, rgba(14, 17, 27, 0.7) 100%);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.06);
+}
+
+.dark .glass-card {
+  background: linear-gradient(135deg, rgba(20, 24, 36, 0.85) 0%, rgba(14, 17, 27, 0.7) 100%);
   border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: none;
 }
 
 /* Subtle native app touch feedback */
@@ -81,3 +122,27 @@ html, body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Eliminate default browser black borders / outlines on click/focus */
+button,
+[role="button"],
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus,
+button:focus-visible,
+button:active,
+[role="button"]:focus,
+[role="button"]:focus-visible,
+[role="button"]:active {
+  outline: none !important;
+}
+
+*:focus-visible {
+  outline: none;
+}
+

@@ -9,11 +9,11 @@ export default {
     extend: {
       colors: {
         app: {
-          bg: '#08090E',
-          surface: '#0E111B',
-          card: '#141824',
+          bg: 'var(--app-bg)',
+          surface: 'var(--app-surface)',
+          card: 'var(--app-card)',
           subtle: '#1C2234',
-          border: 'rgba(255, 255, 255, 0.08)',
+          border: 'var(--app-border)',
           'border-active': 'rgba(0, 216, 255, 0.35)',
         },
         rn: {

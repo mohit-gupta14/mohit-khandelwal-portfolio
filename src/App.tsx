@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { ThemeProvider } from './context/ThemeContext';
+import { MouseIndicator } from './components/ui/MouseIndicator';
 import { AppHeader } from './components/layout/AppHeader';
 import { MobileNav } from './components/layout/MobileNav';
 import { AppFooter } from './components/layout/AppFooter';
@@ -77,16 +79,20 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-app-bg text-slate-100 flex flex-col relative selection:bg-rn-cyan/20 selection:text-rn-cyan">
-      
-      {/* Unified, Premium Header */}
-      <AppHeader
-        activeSection={activeSection}
-        setActiveSection={setActiveSection}
-        onOpenRecruiterModal={() => setIsRecruiterOpen(true)}
-        onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
-        onOpenMetro={() => setIsMetroOpen(true)}
-      />
+    <ThemeProvider>
+      <div className="min-h-screen bg-app-bg text-slate-800 dark:text-slate-100 flex flex-col relative selection:bg-rn-cyan/20 selection:text-rn-cyan transition-colors duration-300">
+        
+        {/* Custom Mouse Follower & Top Scroll Progress Bar */}
+        <MouseIndicator />
+
+        {/* Unified, Premium Header */}
+        <AppHeader
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+          onOpenRecruiterModal={() => setIsRecruiterOpen(true)}
+          onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+          onOpenMetro={() => setIsMetroOpen(true)}
+        />
 
       {/* Main Content Container */}
       <main className="flex-1 pb-16 md:pb-0">
@@ -138,5 +144,6 @@ export default function App() {
       />
 
     </div>
+  </ThemeProvider>
   );
 }

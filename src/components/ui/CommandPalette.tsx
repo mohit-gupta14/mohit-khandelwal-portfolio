@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Download, Sparkles, Terminal, Mail, Phone, Linkedin, Github, PartyPopper, ChevronRight, X } from 'lucide-react';
+import { Search, Download, Sparkles, Terminal, Mail, Phone, Linkedin, Github, PartyPopper, ChevronRight, X, Sun, Moon } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { profileData } from '../../data/portfolioData';
+import { useTheme } from '../../context/ThemeContext';
 
 interface CommandPaletteProps {
   isOpen: boolean;
@@ -21,6 +22,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 }) => {
   const [query, setQuery] = useState('');
   const [copiedText, setCopiedText] = useState<string | null>(null);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -70,6 +72,18 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   };
 
   const actions = [
+    {
+      id: 'theme',
+      category: 'Preferences',
+      title: theme === 'dark' ? 'Switch to Day Theme (Light Mode)' : 'Switch to Night Theme (Dark Mode)',
+      subtitle: 'Toggle light and dark color scheme',
+      icon: theme === 'dark' ? Sun : Moon,
+      iconColor: theme === 'dark' ? 'text-amber-400' : 'text-indigo-500',
+      action: () => {
+        toggleTheme();
+        onClose();
+      },
+    },
     {
       id: 'recruiter',
       category: 'Recruiter Fast-Track',
@@ -215,22 +229,22 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: -10 }}
           transition={{ duration: 0.16 }}
-          className="relative w-full max-w-xl bg-slate-900 border border-rn-cyan/40 rounded-2xl shadow-2xl overflow-hidden z-10"
+          className="relative w-full max-w-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-rn-cyan/40 rounded-2xl shadow-2xl overflow-hidden z-10"
         >
           {/* Search Input Bar */}
-          <div className="p-3.5 border-b border-white/10 flex items-center gap-3 bg-slate-800/80">
-            <Search className="w-5 h-5 text-rn-cyan flex-shrink-0" />
+          <div className="p-3.5 border-b border-slate-200 dark:border-white/10 flex items-center gap-3 bg-slate-50 dark:bg-slate-800/80">
+            <Search className="w-5 h-5 text-cyan-600 dark:text-rn-cyan flex-shrink-0" />
             <input
               type="text"
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search commands, projects, shortcuts..."
-              className="w-full bg-transparent border-none text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-0 font-medium"
+              className="w-full bg-transparent border-none text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-400 focus:outline-none focus:ring-0 font-medium"
             />
             <button
               onClick={onClose}
-              className="p-1 rounded-lg text-slate-400 hover:text-white"
+              className="p-1 rounded-lg text-slate-400 hover:text-slate-900 dark:hover:text-white"
             >
               <X className="w-4 h-4" />
             </button>
@@ -251,36 +265,36 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   <button
                     key={action.id}
                     onClick={action.action}
-                    className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-white/[0.08] transition-colors text-left group"
+                    className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/[0.08] transition-colors text-left group"
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`p-2 rounded-lg bg-white/[0.04] border border-white/5 ${action.iconColor}`}>
+                      <div className={`p-2 rounded-lg bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/5 ${action.iconColor}`}>
                         <Icon className="w-4 h-4" />
                       </div>
                       <div>
-                        <span className="text-xs font-semibold text-white block group-hover:text-rn-cyan transition-colors">
+                        <span className="text-xs font-semibold text-slate-900 dark:text-white block group-hover:text-cyan-600 dark:group-hover:text-rn-cyan transition-colors">
                           {action.title}
                         </span>
-                        <span className="text-[10px] text-slate-400 block">
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400 block">
                           {action.subtitle}
                         </span>
                       </div>
                     </div>
-                    <span className="text-[10px] font-mono text-slate-500 uppercase px-2 py-0.5 rounded bg-white/[0.03]">
+                    <span className="text-[10px] font-mono text-slate-500 dark:text-slate-500 uppercase px-2 py-0.5 rounded bg-slate-100 dark:bg-white/[0.03]">
                       {action.category}
                     </span>
                   </button>
                 );
               })
             ) : (
-              <div className="py-8 text-center text-xs text-slate-400">
+              <div className="py-8 text-center text-xs text-slate-500 dark:text-slate-400">
                 No matching actions found for "{query}".
               </div>
             )}
           </div>
 
           {/* Footer Shortcuts hint */}
-          <div className="p-2.5 bg-slate-950/80 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+          <div className="p-2.5 bg-slate-50 dark:bg-slate-950/80 border-t border-slate-200 dark:border-white/10 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-mono">
             <span>Navigation: ↑ ↓ Enter</span>
             <span>ESC to close</span>
           </div>

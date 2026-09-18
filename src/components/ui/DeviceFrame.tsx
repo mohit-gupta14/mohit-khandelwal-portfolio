@@ -22,12 +22,12 @@ export const DeviceFrame: React.FC = () => {
     <div className="relative mx-auto select-none">
       
       {/* Soft Ambient Glow under iPhone */}
-      <div className="absolute -inset-4 bg-gradient-to-tr from-cyan-500/20 via-indigo-500/15 to-purple-500/10 rounded-[60px] blur-3xl -z-10 pointer-events-none opacity-80" />
+      <div className="absolute -inset-4 bg-gradient-to-tr from-cyan-500/10 via-indigo-500/10 to-purple-500/10 dark:from-cyan-500/20 dark:via-indigo-500/15 dark:to-purple-500/10 rounded-[60px] blur-3xl -z-10 pointer-events-none opacity-60 dark:opacity-80" />
 
       {/* ========================================================
           AUTHENTIC iPHONE 16 PRO TITANIUM CHASSIS
          ======================================================== */}
-      <div className="relative w-[320px] sm:w-[340px] rounded-[52px] p-[10px] bg-gradient-to-b from-slate-600 via-slate-800 to-slate-950 shadow-[0_25px_70px_-15px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.12),inset_0_1px_1px_rgba(255,255,255,0.4)]">
+      <div className="relative w-[320px] sm:w-[340px] rounded-[52px] p-[10px] bg-gradient-to-b from-slate-600 via-slate-800 to-slate-950 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.25)] dark:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.12),inset_0_1px_1px_rgba(255,255,255,0.4)]">
         
         {/* Left Hardware Buttons: Action Button, Volume Up, Volume Down */}
         <div className="absolute top-[82px] -left-[3.5px] w-[3.5px] h-[18px] bg-slate-500 rounded-l-sm shadow-sm" />
